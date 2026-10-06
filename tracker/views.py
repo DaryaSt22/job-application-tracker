@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import JobApplication
 
 def index(request):
-    return render(request, "index.html")
+    return render(request, "tracker/index.html")
 
 def application_list(request):
     applications = JobApplication.objects.all()
