@@ -5,15 +5,14 @@
     <title>My applications</title>
 </head>
 <body>
-<a href="{% url 'tracker:application_list' %}">My applications</a>
     <h1>My applications</h1>
 
     {% for application in applications %}
         <article>
             <h2>{{ application.company }}</h2>
             <p>{{ application.job_title }}</p>
-            <p>Status: {{ application._____ }}</p>
-            <p>Applied on: {{ application._____ }}</p>
+            <p>Status: {{ application.status }}</p>
+            <p>Applied on: {{ application.applied_on }}</p>
         </article>
     {% empty %}
         <p>No applications yet.</p>

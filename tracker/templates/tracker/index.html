@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<a href="{% url 'admin:index' %}">Manage applications</a>
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,14 +15,16 @@
 </style>
 </head>
 <body>
+<a href="{% url 'admin:index' %}">Manage applications</a>
+<a href="{% url 'tracker:application_list' %}">My applications</a>
     <h2>Welcome to Job Application Tracker</h2>
     <p>Organize your job search and keep all application details in one place.</p>
     <h2>What you can do</h2>
-</body>
 <ul>
     <li>Save job vacancies and links</li>
     <li>Track application statuses</li>
     <li>Plan upcoming interviews</li>
     <li>Keep important notes</li>
 </ul>
+</body>
 </html>
