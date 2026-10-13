@@ -7,6 +7,7 @@ class JobApplication(models.Model):
         VIEWED = "viewed", "Отклик просмотрен"
         DECLINED = "declined", "Отказ"
         CONTACTED = "contacted", "Работодатель связался"
+        NOT_CONTACTED = "not contacted", "Работодатель не связался"
         INTERVIEW = "interview", "Собеседование назначено"
         OFFER = "offer", "Оффер получен"
 

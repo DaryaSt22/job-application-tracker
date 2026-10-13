@@ -1,14 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import JobApplication
+from .forms import JobApplicationForm
 
 def index(request):
     return render(request, "tracker/index.html")
 
 def application_list(request):
     applications = JobApplication.objects.all()
+    form = JobApplicationForm()
     return render(
         request,
         "tracker/application_list.html",
-        {"applications": applications},
+        {"applications": applications, "form": form},
     )

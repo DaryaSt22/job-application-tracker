@@ -1,5 +1,4 @@
 from django.urls import path
-
 from . import views
 
 
@@ -12,4 +11,5 @@ urlpatterns = [
         views.application_list,
         name="application_list",
     ),
+    path("/edit-applications", views.index, name="edit_applications"),
 ]
