@@ -11,5 +11,6 @@ urlpatterns = [
         views.application_list,
         name="application_list",
     ),
-    path("/edit-applications", views.index, name="edit_applications"),
+
+    path("applications/<int:pk>/edit/", views.edit, name="edit"),
 ]
