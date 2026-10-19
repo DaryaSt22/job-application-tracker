@@ -18,8 +18,15 @@ def application_list(request):
 def edit(request, pk):
     application = JobApplication.objects.get(pk=pk)
     form = JobApplicationForm(instance=application)
+
+    if request.method == "POST":
+        form = JobApplicationForm(request.POST, instance=application)
+        is_form_valid = form.is_valid()
     return render(
         request,
         "tracker/edit.html",
         {"edit": application, "form": form},
+
+
+
     )

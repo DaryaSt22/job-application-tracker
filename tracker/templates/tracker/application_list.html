@@ -6,10 +6,10 @@
 </head>
 <body>
     <h1>My applications</h1>
-
     {{ form }}
 
     {% for application in applications %}
+     <a href="{% url 'tracker:edit' application.pk %}">Edit</a>
         <article>
             <h2>{{ application.company }}</h2>
             <p>{{ application.job_title }}</p>
