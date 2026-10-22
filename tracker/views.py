@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import JobApplication
 from .forms import JobApplicationForm
 
@@ -22,11 +22,18 @@ def edit(request, pk):
     if request.method == "POST":
         form = JobApplicationForm(request.POST, instance=application)
         is_form_valid = form.is_valid()
+        if is_form_valid:
+            form.save()
+            return redirect("tracker:application_list")
     return render(
         request,
         "tracker/edit.html",
         {"edit": application, "form": form},
-
-
-
     )
+
+def save(request):
+    if request.method == "POST":
+        form = JobApplicationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("tracker:application_list")

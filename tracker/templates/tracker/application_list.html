@@ -3,10 +3,25 @@
 <head>
     <meta charset="utf-8">
     <title>My applications</title>
+    <style>
+        .myfield{
+            border:1px solid #ccc;
+            border-radius:5px;
+            height:25px;
+            width:200px;
+            margin: 10px 10px 10px 0;
+        }
+    </style>
 </head>
 <body>
     <h1>My applications</h1>
-    {{ form }}
+   <form method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+</form>
 
     {% for application in applications %}
      <a href="{% url 'tracker:edit' application.pk %}">Edit</a>
