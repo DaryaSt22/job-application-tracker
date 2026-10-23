@@ -13,4 +13,5 @@ urlpatterns = [
     ),
 
     path("applications/<int:pk>/edit/", views.edit, name="edit"),
+    path("applications/<int:pk>/delete/", views.delete, name="delete"),
 ]

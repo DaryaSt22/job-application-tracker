@@ -9,6 +9,7 @@ def index(request):
 
 def application_list(request):
     applications = JobApplication.objects.all()
+
     if request.method == "POST":
         form = JobApplicationForm(request.POST)
         if form.is_valid():
@@ -23,7 +24,6 @@ def application_list(request):
     )
 
 
-
 def edit(request, pk):
     application = JobApplication.objects.get(pk=pk)
     form = JobApplicationForm(instance=application)
@@ -34,8 +34,22 @@ def edit(request, pk):
         if is_form_valid:
             form.save()
             return redirect("tracker:application_list")
+
     return render(
         request,
         "tracker/edit.html",
-        {"edit": application, "form": form},
+        {"application": application, "form": form},
+    )
+
+def delete(request, pk):
+    application = JobApplication.objects.get(pk=pk)
+
+    if request.method == "POST":
+        application.delete()
+        return redirect("tracker:application_list")
+
+    return render(
+        request,
+        "tracker/delete.html",
+        {"application": application},
     )
