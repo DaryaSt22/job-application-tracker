@@ -6,14 +6,23 @@ from .forms import JobApplicationForm
 def index(request):
     return render(request, "tracker/index.html")
 
+
 def application_list(request):
     applications = JobApplication.objects.all()
-    form = JobApplicationForm()
+    if request.method == "POST":
+        form = JobApplicationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("tracker:application_list")
+    else:
+        form = JobApplicationForm()
     return render(
         request,
         "tracker/application_list.html",
         {"applications": applications, "form": form},
     )
+
+
 
 def edit(request, pk):
     application = JobApplication.objects.get(pk=pk)
@@ -30,10 +39,3 @@ def edit(request, pk):
         "tracker/edit.html",
         {"edit": application, "form": form},
     )
-
-def save(request):
-    if request.method == "POST":
-        form = JobApplicationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("tracker:application_list")
