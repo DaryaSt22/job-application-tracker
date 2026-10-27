@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import JobApplication
 from .forms import JobApplicationForm
 
@@ -25,7 +25,7 @@ def application_list(request):
 
 
 def edit(request, pk):
-    application = JobApplication.objects.get(pk=pk)
+    application = get_object_or_404(JobApplication, pk=pk)
     form = JobApplicationForm(instance=application)
 
     if request.method == "POST":
@@ -42,7 +42,7 @@ def edit(request, pk):
     )
 
 def delete(request, pk):
-    application = JobApplication.objects.get(pk=pk)
+    application = get_object_or_404(JobApplication, pk=pk)
 
     if request.method == "POST":
         application.delete()
