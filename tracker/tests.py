@@ -1,6 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
 
+from config.asgi import application
+from .models import JobApplication
+
 
 class JobApplicationViewTests(TestCase):
 
@@ -18,3 +21,14 @@ class JobApplicationViewTests(TestCase):
         url = reverse("tracker:application_list")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "tracker/application_list.html")
+
+    def test_create_application(self):
+        url = reverse("tracker:application_list")
+        data={"company": "Test Company", "job_title": "Python Developer", "status": "sent",
+                                    "vacancy_url": "https://www.example.com", "applied_on": "2026-10-28", }
+        response = self.client.post(url, data=data)
+        self.assertEqual(JobApplication.objects.count(), 1)
+
+
+
