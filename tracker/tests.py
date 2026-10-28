@@ -26,9 +26,17 @@ class JobApplicationViewTests(TestCase):
     def test_create_application(self):
         url = reverse("tracker:application_list")
         data={"company": "Test Company", "job_title": "Python Developer", "status": "sent",
-                                    "vacancy_url": "https://www.example.com", "applied_on": "2026-10-28", }
+                                    "vacancy_url": "https://www.example.com", "applied_on": "2026-11-28", }
         response = self.client.post(url, data=data)
         self.assertEqual(JobApplication.objects.count(), 1)
+        self.assertEqual(response.status_code, 302)
+        application = JobApplication.objects.get()
+        self.assertEqual(application.company, "Test Company")
 
+    def test_update_application(self):
+        application = JobApplication.objects.create()
+        url = reverse("tracker:edit", kwargs={"pk": application.pk})
+        data = {"company": "Test Company", "job_title": "Python Developer", "status": "sent",
+                "vacancy_url": "https://www.example.com", "applied_on": "2026-11-28", }
 
 
