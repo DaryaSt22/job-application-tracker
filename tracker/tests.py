@@ -34,9 +34,11 @@ class JobApplicationViewTests(TestCase):
         self.assertEqual(application.company, "Test Company")
 
     def test_update_application(self):
-        application = JobApplication.objects.create()
+        application = JobApplication.objects.create(company='Old Company')
         url = reverse("tracker:edit", kwargs={"pk": application.pk})
-        data = {"company": "Test Company", "job_title": "Python Developer", "status": "sent",
+        data = {"company": "Updated Company", "job_title": "Python Developer", "status": "sent",
                 "vacancy_url": "https://www.example.com", "applied_on": "2026-11-28", }
-
+        response = self.client.post(url, data=data)
+        application.refresh_from_db()
+        self.assertEqual(application.company, "Updated Company")
 
