@@ -42,3 +42,10 @@ class JobApplicationViewTests(TestCase):
         application.refresh_from_db()
         self.assertEqual(application.company, "Updated Company")
 
+    def test_delete_application(self):
+        application = JobApplication.objects.create(company='Old Company')
+        url = reverse("tracker:delete", kwargs={"pk": application.pk})
+        response = self.client.post(url)
+        self.assertEqual(JobApplication.objects.count(), 0)
+        self.assertEqual(response.status_code, 302)
+

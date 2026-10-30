@@ -6,7 +6,6 @@ from .forms import JobApplicationForm
 def index(request):
     return render(request, "tracker/index.html")
 
-
 def application_list(request):
     applications = JobApplication.objects.all()
 
@@ -22,7 +21,6 @@ def application_list(request):
         "tracker/application_list.html",
         {"applications": applications, "form": form},
     )
-
 
 def edit(request, pk):
     application = get_object_or_404(JobApplication, pk=pk)
