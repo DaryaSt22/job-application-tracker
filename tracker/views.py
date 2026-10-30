@@ -8,6 +8,9 @@ def index(request):
 
 def application_list(request):
     applications = JobApplication.objects.all()
+    selected_status = request.GET.get("status")
+    if selected_status:
+        applications = applications.filter(status=selected_status)
 
     if request.method == "POST":
         form = JobApplicationForm(request.POST)

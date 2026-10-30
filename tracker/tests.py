@@ -1,7 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse
-
-from config.asgi import application
 from .models import JobApplication
 
 

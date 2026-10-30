@@ -23,6 +23,13 @@
     <button type="submit">Save</button>
 </form>
 
+   <form method="get">
+    <select name="status">
+        <option value="not_contacted">Not contacted</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
     {% for application in applications %}
      <a href="{% url 'tracker:edit' application.pk %}">Edit</a>
         <article>
