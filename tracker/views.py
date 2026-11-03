@@ -9,6 +9,7 @@ def index(request):
 def application_list(request):
     applications = JobApplication.objects.all()
     selected_status = request.GET.get("status")
+    status_choices = JobApplication.Status.choices
     if selected_status:
         applications = applications.filter(status=selected_status)
 
@@ -22,7 +23,7 @@ def application_list(request):
     return render(
         request,
         "tracker/application_list.html",
-        {"applications": applications, "form": form},
+        {"applications": applications, "form": form, "status_choices": status_choices},
     )
 
 def edit(request, pk):
