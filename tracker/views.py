@@ -9,9 +9,13 @@ def index(request):
 def application_list(request):
     applications = JobApplication.objects.all()
     selected_status = request.GET.get("status")
+    search_query = request.GET.get("q")
     status_choices = JobApplication.Status.choices
     if selected_status:
         applications = applications.filter(status=selected_status)
+
+    if search_query:
+        applications = applications.filter(company__icontains=search_query)
 
     if request.method == "POST":
         form = JobApplicationForm(request.POST)
