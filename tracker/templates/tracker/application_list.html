@@ -32,6 +32,10 @@
     </select>
     <button type="submit">Filter</button>
 </form>
+    <form method="get">
+    <input type="text" name="q">
+    <button type="submit">Search</button>
+    </form>
 
     {% for application in applications %}
      <a href="{% url 'tracker:edit' application.pk %}">Edit</a>
