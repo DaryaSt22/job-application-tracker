@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import JobApplication
 from .forms import JobApplicationForm
@@ -16,6 +17,8 @@ def application_list(request):
 
     if search_query:
         applications = applications.filter(company__icontains=search_query)
+
+    applications = applications.order_by("-applied_on")
 
     if request.method == "POST":
         form = JobApplicationForm(request.POST)
