@@ -31,7 +31,8 @@ def application_list(request):
     return render(
         request,
         "tracker/application_list.html",
-        {"applications": applications, "form": form, "status_choices": status_choices, "total_applications": total_applications},
+        {"applications": applications, "form": form, "status_choices": status_choices,
+         "total_applications": total_applications},
     )
 
 def edit(request, pk):
